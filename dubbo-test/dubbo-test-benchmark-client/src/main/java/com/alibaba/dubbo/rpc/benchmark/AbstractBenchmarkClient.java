@@ -77,7 +77,9 @@ public abstract class AbstractBenchmarkClient {
     Properties                            properties = ConfigUtils.getProperties();
 
     public void run(String[] args) throws Exception {
-
+    	if(properties.size() == 0){
+    		properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("dubbo.properties"));
+    	}
         final String serverIP = properties.getProperty("serverip");
         final int serverPort = Integer.parseInt(properties.getProperty("serverport"));
         final int concurrents = Integer.parseInt(properties.getProperty("concurrents"));
